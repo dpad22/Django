@@ -1,0 +1,166 @@
+Create and run the migration files to create the tables in your database
+
+In the projects folder run:
+        python manage.py makemigrations
+        python manage.py migrate
+        python manage.py shell
+
+
+ Create a .txt file where you'll save each of your queries from below
+
+ Query: Create 5 books with the following names: C Sharp, Java, Python, PHP, Ruby
+
+from books_authors_app.models import Book, Author
+>>> C_Sharp = Book.objects.create(title = "C Sharp", description = "book about C Sharp")
+>>> Java = Book.objects.create(title = "Java", description = "book about Java")
+>>> Python = Book.objects.create(title = "Python", description = "book about Python")
+>>> PHP = Book.objects.create(title = "PHP", description = "book about PHP")
+>>> Ruby = Book.objects.create(title = "Ruby", description = "book about Ruby")
+
+ Query: Create 5 different authors: Jane Austen, Emily Dickinson, Fyodor Dostoevsky, William Shakespeare, Lau Tzu
+
+Jane_Austen = Author.objects.create(first_name = "Jane", last_name = "Austen",)
+>>> Emily_Dickinson = Author.objects.create(first_name = "Emily", last_name = "Dickinson")
+>>> Fyodor_Dostoevsky = Author.objects.create(first_name = "Fyodor", last_name = "Dostoevsky")
+William_Shakespeare = Author.objects.create(first_name = "William", last_name = "Shakespeare")
+>>> Lau_Tzu = Author.objects.create(first_name = "Lau",last_name = "Tzu")
+
+ Add a new text field in the authors table called 'notes'.
+
+exit() to exit python shell.
+Update Author with new text field called notes.
+
+ Create and run the migration files to update the table in your database.
+
+python manage.py makemigrations
+python manage.py migrate
+python manage.py shell
+
+ Query: Change the name of the C Sharp book to C#
+
+>>> C_Sharp = Book.objects.get(id=1)
+>>> C_Sharp
+<Book: Book object (1)>
+>>> C_Sharp.title
+'C Sharp'
+>>> C_Sharp.title = "C#"
+>>> C_Sharp.save()
+>>> C_Sharp.title
+'C#'
+
+
+ Query: Change the first name of the 4th author to Bill
+
+>>> C_Sharp
+<Book: Book object (1)>
+>>> C_Sharp.title
+'C Sharp'
+>>> C_Sharp.title = "C#"
+>>> C_Sharp.save()
+>>> C_Sharp.title
+'C#'
+
+
+ Query: Assign the first author to the first 2 books
+
+>>> First_Author = Author.objects.first()
+>>> First_Author
+<Author: Author object (2)>
+>>> first_book = Book.objects.get(id=1)
+>>> second_book = Book.objects.get(id=2)
+>>> First_Author.books.add(first_book)
+>>> First_Author.books.add(second_book)
+>>> First_Author.books.all()
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>]>
+
+ Query: Assign the second author to the first 3 books
+
+Second_Author = Author.objects.get(id=3)
+>>> third_book = Book.objects.get(id=3)
+>>> Second_Author.books.add(first_book)
+>>> Second_Author.books.add(second_book)
+>>> Second_Author.books.add(third_book)
+
+ Query: Assign the third author to the first 4 books
+
+Third_Author = Author.objects.get(id=4)
+>>> fourth_book = Book.objects.get(id=4)
+>>> Third_Author.books.add(first_book)
+>>> Third_Author.books.add(second_book)
+>>> Third_Author.books.add(third_book)
+>>> Third_Author.books.add(fourth_book)
+
+ Query: Assign the fourth author to the first 5 books (or in other words, all the books)
+
+fifth_book = Book.objects.get(id=5)
+>>> Fourth_Author.books.add(first_book)
+>>> Fourth_Author.books.add(second_book)
+>>> Fourth_Author.books.add(third_book)
+>>> Fourth_Author.books.add(fourth_book)
+>>> Fourth_Author.books.add(fifth_book)
+
+ Query: Retrieve all the authors for the 3rd book
+
+third_book.authors.all()
+<QuerySet [<Author: Author object (3)>, <Author: Author object (4)>, <Author: Author object (5)>]>
+>>> Third_Book_Authors = third_book.authors.all()
+>>> for authors in Third_Book_Authors:
+...     print(authors.first_name)
+... 
+Emily
+Fyodor
+Bill
+
+
+ Query: Remove the first author of the 3rd book
+
+Third_Book_Authors
+<QuerySet [<Author: Author object (3)>, <Author: Author object (4)>, <Author: Author object (5)>]>
+>>> Remove_First
+<Author: Author object (3)>
+>>> third_book
+<Book: Book object (3)>
+>>> third_book.authors.remove(Remove_First)
+
+
+ Query: Add the 5th author as one of the authors of the 2nd book
+
+>>> Fifth_Author = Author.objects.last()
+>>> Fifth_Author
+<Author: Author object (6)>
+>>> second_book
+<Book: Book object (2)>
+>>> second_book.authors.add(Fifth_Author)
+>>> second_book.authors.all()
+<QuerySet [<Author: Author object (2)>, <Author: Author object (3)>, <Author: Author object (4)>, <Author: Author object (5)>, <Author: Author object (6)>]>
+>>> Second_Book_Authors = second_book.authors.all()
+>>> for authors in Second_Book_Authors:
+...     print(authors.first_name)
+... 
+Jane
+Emily
+Fyodor
+Bill
+Lau
+
+
+ Query: Find all the books that the 3rd author is part of
+
+>>> Third_Author.books.all()
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>, <Book: Book object (4)>]>
+>>> third_author_books = Third_Author.books.all()
+>>> for book in third_author_books:
+...     print(book.title)
+... 
+C#
+Java
+Python
+PHP
+
+
+ Query: Find all the authors that contributed to the 5th book
+
+>>> Authors
+<QuerySet [<Author: Author object (2)>, <Author: Author object (3)>, <Author: Author object (4)>, <Author: Author object (5)>, <Author: Author object (6)>]>
+>>> fifth_book.authors.all()
+<QuerySet [<Author: Author object (5)>]>

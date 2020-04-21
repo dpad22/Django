@@ -1,0 +1,36 @@
+.container {
+    border: 2px dotted red;
+    width: 1200px;
+    height: 1000px;
+}
+
+
+#exampleFormControlSelect1{
+    width: 250px;
+}
+
+#title{
+    width: 400px;
+}
+#description {
+    width: 400px;
+}
+.bookadd{
+    width: 450px;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 10px;
+    margin-top: 40px;
+}
+
+.table_div{
+    width: 450px;
+    display: inline-block;
+    vertical-align: top;
+    justify-content: right;
+    margin-left: 180px;
+    margin-top: 40px;
+
+}
+
+
